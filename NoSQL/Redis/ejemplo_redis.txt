@@ -1,0 +1,64 @@
+# Redis - Comandos y estructuras de datos básicas
+# Ejecutar en redis-cli
+
+# ─────────────────────────────────────────────
+# Strings
+# ─────────────────────────────────────────────
+SET usuario:1:nombre "Ana García"
+SET usuario:1:email  "ana.garcia@email.com"
+GET usuario:1:nombre
+
+# Con expiración (TTL en segundos)
+SET session:abc123 "token_de_sesion" EX 3600
+TTL session:abc123
+
+# Incrementar contador
+SET visitas:pagina:home 0
+INCR  visitas:pagina:home
+INCRBY visitas:pagina:home 10
+GET  visitas:pagina:home
+
+# ─────────────────────────────────────────────
+# Hashes (ideal para representar objetos)
+# ─────────────────────────────────────────────
+HSET producto:1 nombre "Laptop Pro 15" precio 1299.99 stock 10
+HGET  producto:1 nombre
+HGETALL producto:1
+HINCRBY producto:1 stock -1
+
+# ─────────────────────────────────────────────
+# Lists (listas doblemente enlazadas)
+# ─────────────────────────────────────────────
+RPUSH pedidos:pendientes 101 102 103
+LPUSH pedidos:pendientes 100
+LRANGE pedidos:pendientes 0 -1
+LPOP  pedidos:pendientes
+
+# ─────────────────────────────────────────────
+# Sets (conjuntos sin duplicados)
+# ─────────────────────────────────────────────
+SADD categorias "Electrónica" "Periféricos" "Software"
+SMEMBERS categorias
+SISMEMBER categorias "Electrónica"
+
+# ─────────────────────────────────────────────
+# Sorted Sets (conjuntos ordenados por score)
+# ─────────────────────────────────────────────
+ZADD ranking:productos 150 "Laptop Pro 15"
+ZADD ranking:productos 320 "Mouse Inalámbrico"
+ZADD ranking:productos  75 "Teclado Mecánico"
+
+# Obtener productos por ranking (mayor a menor)
+ZREVRANGE ranking:productos 0 -1 WITHSCORES
+
+# ─────────────────────────────────────────────
+# Expiración y administración
+# ─────────────────────────────────────────────
+EXPIRE usuario:1:nombre 86400   # expira en 1 día
+TTL    usuario:1:nombre
+PERSIST usuario:1:nombre        # quitar expiración
+
+KEYS   producto:*               # listar claves (evitar en producción)
+EXISTS producto:1
+DEL    producto:1
+TYPE   ranking:productos
