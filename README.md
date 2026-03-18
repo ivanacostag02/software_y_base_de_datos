@@ -258,9 +258,10 @@ Al completar este programa, estudiantes estarán preparados para:
 
 ## 👨‍🏫 Docente Autor
 
-**Ing. Ivan Acosta, Mgs.**
+**Ing. Ivan Acosta,. Mgs**
+**Magister en Sistemas, Big Data y Ciencia de datos**
 
-Especialista en Programación e Ingeniería de Software
+Especialista en Programación, Ingeniería de Software, Data Science e Inteligencia Artificial.
 - Experiencia en diseño curricular educativo
 - Conocimiento de estándares industriales
 - Comprensión de competencias laborales requeridas
